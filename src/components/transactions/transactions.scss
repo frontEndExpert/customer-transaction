@@ -1,0 +1,17 @@
+.cards {
+    display: flex;
+
+    .card{
+        border: 1px solid black;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 800px;
+        height: 80px;
+        margin:5px;
+        padding: 10px;
+        background-color: antiquewhite;
+        color:blue;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18pt;
+    }
+}

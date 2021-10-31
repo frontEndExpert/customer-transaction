@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  .cards{
+    display: flex;
+    
+  .card {
+    display: block;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: 80px;
+  }
+}
+}
+

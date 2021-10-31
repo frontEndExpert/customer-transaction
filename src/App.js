@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
+import './App.scss';
+import Modal from './components/modal/modal';
+import Transactions from './components/transactions/transactions'
 //import * as usersObj from './db/data.json';
 
 /* type transaction = {
@@ -28,6 +30,7 @@ import './App.css';
 */
 
 function App() {
+
 const [users, setUsers] = useState([
   {
     "customer_id": "",
@@ -54,19 +57,11 @@ const [transArr, setTransArr] = useState({
         "cerdit_card_number": "",
 })
 
-
+const[showModal, setShowModal] = useState(false);
+const [currentTransId, setCurrentTransId] = useState(0);
 //console.log("users.length",users.length);
 
-const getAllTrans = () => {
-  console.log("getAllTrans");
-  fetch('/transactions')
-    .then(result => result.json())
-    .then(body => {
-      console.log("body",body);
-      setTransArr( JSON.stringify( body));
 
-    })
-};
 
  const getUsers = () => {
   console.log("getUsers");
@@ -81,10 +76,7 @@ const handleSubmit = () => {
   console.log('hello');
 }
 
-useEffect(()=>{
-  getAllTrans();
-  console.log("useEffect transArr",transArr);
-}, []);
+
 
 /*
 useEffect(()=>{
@@ -106,50 +98,15 @@ cerdit_card_number: ""
 //&& transArr[0].transaction_id
 console.log("useEffect transObj", transObj);
   
+
   return (
+    <>
     <div className="App">
-
-      {(transObj.length > 1) && transObj.map( (trans) => (
-        <div key={trans._id} className='card'>
-        <form>
-          <div ><label>transaction_id</label><input>{trans._id}</input></div>
-          <div><label>customer_id</label><input>{trans.customer_id}</input></div>
-          <div><label>description</label><input>{trans.description}</input></div>
-          <div><label>currency</label><input>{trans.currency}</input></div>
-          <div><label>amount</label><input>{trans.amount}</input></div>
-          <div><label>cerdit_card_type</label><input>{trans.cerdit_card_type}</input></div>
-          <div><label>cerdit_card_number</label><input>{trans.cerdit_card_type}</input></div>
-          <div><button onClick={handleSubmit}>Save</button></div>
-        </form>
-        </div>
-  ))}
-
-      {/* {users && users.map((user)=>{
-        <div>
-        <div >{user.customer_id} : {user.first_name} {user.last_name} </div>
-          <form>
-            <input id="1" >{user.customer_id}</input>
-            <input id="2" >{user.first_name}</input>
-            <input id="3" >{user.last_name}</input>
-            <input id="4" >{user.email}</input>
-            <input id="5" >{user.gender}</input>
-            <input id="6" >{user.country}</input>
-            <input id="7" >{user.city}</input>
-            <input id="8" >{user.street}</input>
-            <input id="9" >{user.phone}</input>
-            <input id="10" >{user.total_price}</input>
-            <input id="11" >{user.currency}</input>
-            <input id="12" >{user.cerdit_card_type}</input>
-            <input id="13" >{user.cerdit_card_number}</input>
-            <button onClick={HandleSubmit} >Save</button>
-          </form>
-        </div>
-      }) }
-       <p> {(users) && users[0].customer_id}</p>
-        <p>{(transArr) }</p> */}
-
+      <Transactions  />
     </div>
+    </>
   );
+
 }
 
 export default App;
