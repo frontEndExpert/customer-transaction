@@ -1,23 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Modal from '../modal/modal';
 import UpadteTrans from './updateTrans';
+import './transactions.scss';
 
 
 const Transactions = () => {
-    const [transArr, setTransArr] = useState({
-        "transaction_id": "",
+    const [transArr, setTransArr] = useState([{
+        "_id": "1",
               "customer_id": "",
               "description": "",
               "currency": "",
               "amount": "",
               "cerdit_card_type": "",
               "cerdit_card_number": "",
-      });
+      }]);
     const [show, setShow]  = useState(false); 
       const[currentTransId, setCurrentTransId] = useState(0); 
       const[currentTransArr, setCurrentTransArr] = useState(); 
       const [formData, setFormData] = useState("");
-      
+      const modal = useRef();
 
       const getAllTrans = () => {
         console.log("getAllTrans");
@@ -38,15 +39,20 @@ const Transactions = () => {
         console.log("useEffect transArr",transArr);
       }, [show]);
 
-      const handleDelete = (cid) => {
+      const handleDelete = async (cid) => {
         //setCurrentTransId
         console.log("cid",cid);
-        // fetch(`/transactions/del/${cid}`)
+        const requestOptions = {
+          method: "DELETE",
+          headers: { "Content-Type": "application/text" },
+          body:  cid
+        };
+        const user = await fetch(`/transactions/del/${cid}` , requestOptions)
+        console.log("user",user);
         // .then(result => result.json())
         // .then(body => {
         //   console.log("body",body);
-        //   setTransArr(  [...body]);
-    
+        //  // setTransArr( body);
         // })
       };
 
@@ -55,8 +61,14 @@ const Transactions = () => {
         setCurrentTransId(transArr._id);
         setCurrentTransArr(transArr);
         setShow(true);
+        modal.current.style.display = 'block';
 
       };
+
+      const closeModify = (transArr) => {
+        setShow(false);
+        modal.current.style.display = 'none';
+      }
 
     //   const handleModify = (formArr) => {
     //     fetch('/transactions/update/')
@@ -68,10 +80,12 @@ const Transactions = () => {
     //     })
     //   };
 
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("e.target.value", e.target.value);
-        const formData =  e.target.value ;
+      const handleSubmit = (formObj) => {
+       // e.preventDefault();
+        //console.log("e.target.value", e.target.value);
+        console.log("trans formObj", formObj);
+        //const formData =  e.target.value ;
+        const formData = formObj;
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,23 +107,25 @@ const Transactions = () => {
      let transactionArr =  transArr.map( (trans) => {
          console.log("map trans",trans);
         return (
-            <div key={trans._id} >
-                <span>transaction_id: {trans._id} | customer id: {trans.customer_id } | 
-                    description: {trans.description} | currency {trans.currency} | 
-                    amount: {trans.amount} | cerdit_card_number {trans.cerdit_card_number} 
+            <div className="card" key={trans._id} >
+                <span>transaction_id: {trans._id} | customer id: {trans.customer_id } <br/> 
+                    description: {trans.description} <br/> 
+                    currency {trans.currency} | amount: {trans.amount} <br/>
+                    {trans.cerdit_card_type} number: {trans.cerdit_card_number} 
                 </span>
-                <button  onClick={() => openModify(trans)}>Modify</button><button  onClick={() => handleDelete(trans.transaction_id)}>Delete</button>
+                <button className="btn modify" onClick={() => openModify(trans)}>Modify</button>
+                <button className="btn delete" onClick={() => handleDelete(trans._id)}>Delete</button>
             </div>
       )});
 
     return (
             <div>
-                <Modal show={show}   >
+                <Modal show={show} ref={modal} style={{display: 'none'}}  onClick={closeModify} >
                     <UpadteTrans transArr={currentTransArr} formData={formData} onSubmit={(formData)=>handleSubmit(formData)} />
-                </Modal>
-                <div className="cards">
-                    {transactionsArr} 
-                </div>
+                 </Modal>
+                    <div className="cards">
+                        {transactionArr} 
+                    </div>
             </div>
     )}
 

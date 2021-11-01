@@ -15,3 +15,9 @@
     
 "web-vitals": "^1.1.2"
     
+    /mongodb/bin/mongod.exe --dbpath=/mongodb-data
+    task-manager/npm run dev
+
+    customer-transaction/npm run start
+
+    

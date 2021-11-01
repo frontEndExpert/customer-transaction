@@ -48,7 +48,7 @@ const [users, setUsers] = useState([
     "cerdit_card_number": "",
   }]);
 const [transArr, setTransArr] = useState({
-  "transaction_id": "",
+  "id": "",
         "customer_id": "",
         "description": "",
         "currency": "",
@@ -63,18 +63,14 @@ const [currentTransId, setCurrentTransId] = useState(0);
 
 
 
- const getUsers = () => {
-  console.log("getUsers");
-  fetch('/users')
-    .then(result => result.json())
-    .then(body => {
-      setUsers(JSON.parse((body)));
-    })
-};
-
-const handleSubmit = () => {
-  console.log('hello');
-}
+//  const getUsers = () => {
+//   console.log("getUsers");
+//   fetch('/users')
+//     .then(result => result.json())
+//     .then(body => {
+//       setUsers(JSON.parse((body)));
+//     })
+// };
 
 
 
@@ -84,20 +80,20 @@ useEffect(()=>{
   
 }, []);
 */
-let transObj = [{}];
-console.log("JSON.parse(transArr)",JSON.parse(transArr));
+// let transObj = [{}];
+// console.log("JSON.parse(transArr)",JSON.parse(transArr));
 
-transObj = (transArr)? transArr : [{_id: "",
-customer_id: "",
-description: "",
-currency: "",
-amount: "",
-cerdit_card_type: "",
-cerdit_card_number: ""
-}] ;
-//&& transArr[0].transaction_id
-console.log("useEffect transObj", transObj);
-  
+// transObj = (transArr)? transArr : [{_id: "",
+// customer_id: "",
+// description: "",
+// currency: "",
+// amount: "",
+// cerdit_card_type: "",
+// cerdit_card_number: ""
+// }] ;
+// //&& transArr[0].transaction_id
+// console.log("useEffect transObj", transObj);
+
 
   return (
     <>
