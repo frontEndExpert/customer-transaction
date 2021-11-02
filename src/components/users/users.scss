@@ -1,0 +1,64 @@
+
+
+
+
+.users-table{
+    min-width: 1900px;
+    color: black;
+    
+
+    th {
+        width:fit-content;
+        white-space: nowrap;
+        background-color: white;
+        font-size: 14pt;
+        font-weight:bold;
+    }
+
+    tr,td {
+        font-size: 10pt;
+        font-weight:bold;
+
+        .modify{
+            background-color:darkgreen;
+            color: white;
+            font-size: 10pt;
+            &:hover{
+                background-color:rgb(163, 250, 163);
+                color: white;
+            }
+        }
+        
+        .delete{
+            background-color: rgb(255, 123, 0);
+            color: black;
+            font-size: 10pt;
+            &:hover{
+                background-color: rgb(240, 212, 185);
+                color: black;
+            }
+        }
+        
+        .trans-btn {
+            font-size: 10pt;
+            width: 200px;
+            background-color: rgb(146, 139, 245);
+            color: black;
+            &:hover{
+                background-color: rgb(240, 212, 185);
+                color: black;
+            }
+        
+        }
+        
+    }
+
+     tr:nth-child(odd){
+        background-color: rgb(242, 243, 197);
+
+        td:nth-child(odd){
+                background-color: rgb(212, 241, 250);
+            }
+     }
+
+}

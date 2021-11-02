@@ -1,0 +1,23 @@
+.user-form{
+    display: block;
+
+    label {
+        font-weight: bold;
+        font-size: 14pt;
+    }
+    input {
+        width: 200px;
+    }
+
+
+    .formRows{
+        display: flex;
+        flex-flow: row wrap;
+
+        div {
+            width: 30%;
+            margin:1%;
+        }
+
+    }
+}

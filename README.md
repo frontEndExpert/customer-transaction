@@ -1,23 +1,21 @@
-# Getting Started with Create React App
-
-## Available Scripts
-
-"start": "react-scripts start",
-    "build": "react-scripts build",
-    
-"start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start", 
-"build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
 
 
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    
-"web-vitals": "^1.1.2"
-    
+1. please install mongodb
+2. run the mongodb server like this:
     /mongodb/bin/mongod.exe --dbpath=/mongodb-data
-    task-manager/npm run dev
 
-    customer-transaction/npm run start
+3. in task-manager:
+    run: npm i
+    and then
+    npm run dev  // this will open a nodemon app
+
+    last in customer-transaction:
+    run npm i
+    then:
+    npm run start
+
+4. the app is not complete
+there is a lot that can be done to improve
+
 
     

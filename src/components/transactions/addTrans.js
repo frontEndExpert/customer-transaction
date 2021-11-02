@@ -1,32 +1,32 @@
 import {useState} from 'react';
 import './updateTrans.scss'
 
-const UpadteTrans = (props) => {
-    const [id,setId] = useState(props.transArr._id);
-    const [description,setDescription] = useState(props.transArr.description);
+const AddTrans = (props) => {
+    const [id,setId] = useState(0);
+    const [description,setDescription] = useState();
     const [currency,setCurrency] = useState(props.transArr.currency);
-    const [amount,setAmount] = useState(props.transArr.amount);
+    const [amount,setAmount] = useState(0);
     const [cerditCardNumber,setCerditCardNumber] = useState(props.transArr.cerdit_card_number);
     const [cerditCardType,setCerditCardType] = useState(props.transArr.cerdit_card_type);
     const [customerId,setCustomerId] = useState(props.transArr.customer_id);
     //const trans = props.transArr;
 
     console.log('props',props);
+
     const handleSubmit = (e) => {
       e.preventDefault();
 
        const formObj = {
-        _id: id,
         customer_id: customerId,
         description: description,
         currency: currency,
         amount: amount,
-        cerdit_card_number: cerditCardNumber,
-        cerdit_card_type: cerditCardType
+        credit_card_number: cerditCardNumber,
+        credit_card_type: cerditCardType
       }
      
       console.log("formObj",formObj);
-      props.handleSubmit(formObj);
+      props.submitAdd(formObj);
     }
 
 
@@ -34,7 +34,7 @@ const UpadteTrans = (props) => {
 return (
           <>
             <form>
-            <div className="trans-form">    
+            <div className="form">    
               <input type='hidden' name='transaction_id' value={id} />
               <h2>customer_id:{customerId } </h2>
               <label htmlFor='description'>Description</label><br/>
@@ -47,11 +47,11 @@ return (
               <input   name='cerdit_card_number' value={cerditCardNumber } onChange={(e)=>{setCerditCardNumber(e.target.value)}} required /><br/>
               <label htmlFor='cerdit_card_type'>type: </label><br/>
               <input   name='cerdit_card_type' value={cerditCardType } onChange={(e)=>{setCerditCardType(e.target.value)}} required /><br/>
-              <button type="submit" className='btn' onClick={handleSubmit}>Save Changes</button>
+              <button type="submit" className='btn' onClick={handleSubmit}>Add Transaction</button>
             </div>
             </form>
         </>
     )
 }
 
-export default UpadteTrans;
+export default AddTrans;
