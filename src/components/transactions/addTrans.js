@@ -21,8 +21,8 @@ const AddTrans = (props) => {
         description: description,
         currency: currency,
         amount: amount,
-        credit_card_number: cerditCardNumber,
-        credit_card_type: cerditCardType
+        cerdit_card_number: cerditCardNumber,
+        cerdit_card_type: cerditCardType
       }
      
       console.log("formObj",formObj);

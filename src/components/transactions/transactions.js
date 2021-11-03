@@ -139,7 +139,6 @@ const Transactions = (props) => {
 
         const response = await fetch("/transactions/update", requestOptions)
         const transarr = await response.json();
-          console.log("transarr", transarr)
           getUserTrans(transarr.customer_id);
           closeModify();
 
@@ -154,36 +153,19 @@ const Transactions = (props) => {
           body: JSON.stringify(formData)
         };
 
-      const tran = await fetch("/transactions", requestOptions)
+      const response = await fetch("/transactions", requestOptions)
+      const tran = await response.json();
+      console.log("success tran",tran);
       try {
-        console.log("success tran",tran);
+
         setShow(false)
       } catch (e) {
         console.log(" error",e);
          }
-      //     .then(response => response.json())
-      //     .then(res => {
-      //         console.log(res);
-      //           return true;
-      //       })
-      //     .then( (success) => {
-      //         console.log("success",success);
-      //         setShow(false)
-      //       });
-      // };
+         
 
       }
       //
-     // console.log('currentTransArr', currentTransArr);
-// console.log('addTran', addTran);
-//       let modalUpdate = null;
-//       if( addTran ) {
-//           modalUpdate = <AddTrans userId={currentCustomerId} formData={formData} handleSubmit={(formData)=>submitAdd(formData)} />;
-//       } else {
-//         console.log('currentTransArr', currentTransArr);
-//           modalUpdate = <UpadteTrans transArr={currentTransArr} formData={formData} handleSubmit={(formData)=>handleSubmit(formData)} />;
-     
-//       }
 
 
      let transactionArr = (transArr)? transArr.map( (trans) => {
