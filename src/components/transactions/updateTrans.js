@@ -2,6 +2,7 @@ import {useState} from 'react';
 import './updateTrans.scss'
 
 const UpadteTrans = (props) => {
+    console.log('props.transArr',props.transArr);
     const [id,setId] = useState(props.transArr._id);
     const [description,setDescription] = useState(props.transArr.description);
     const [currency,setCurrency] = useState(props.transArr.currency);
@@ -11,7 +12,7 @@ const UpadteTrans = (props) => {
     const [customerId,setCustomerId] = useState(props.transArr.customer_id);
     //const trans = props.transArr;
 
-    console.log('props',props);
+    
     const handleSubmit = (e) => {
       e.preventDefault();
 

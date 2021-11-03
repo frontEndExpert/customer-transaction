@@ -45,15 +45,13 @@ const Users = (props) => {
         const requestOptions = {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body:  uid
+          body:  JSON.stringify({customer_id: uid})
         };
-        const user = await fetch(`/user/del/${uid}` , requestOptions)
-        console.log("user",user);
-        // .then(result => result.json())
-        // .then(body => {
-        //   console.log("body",body);
-        //  // setTransArr( body);
-        // })
+
+        const user = await fetch(`/user/del/${uid}` , requestOptions);
+        const userJson = await user.json();
+        console.log('userText',userJson); // logs 'OK
+        getAllUsers();
       };
 
       const openModify = (userArr) => {
@@ -115,7 +113,7 @@ const Users = (props) => {
       };
     
       const submitAdd = async (formObj) => {
-        console.log("users formObj", formObj);
+        console.log("users submitAdd formObj", formObj);
         const formData = formObj;
         const requestOptions = {
           method: "POST",
@@ -133,10 +131,16 @@ const Users = (props) => {
 
       }
 
-      const OpenModalTransaction = () => {
+      const getLocation =  (user) => {
+        const address = `${user.street} ${user.city} ${user.country}`
+        let geocodeArr = ['1.0000', '2.00000','somelocation' ] ///await geocode(address);
+        return  `latitude: ${geocodeArr[0]} longitude: ${geocodeArr[1]} location: ${geocodeArr[2]}`
+      };
+
+      //const OpenModalTransaction = () => {
           //show all transaction form this customer_id
 
-      }
+      //}
 
       let modalUpdate = null;
       if( currentUserArr == null) {
@@ -157,10 +161,10 @@ const Users = (props) => {
                <tr key={user.customer_id}>
                   <td>{user.customer_id}</td><td>{user.first_name}</td><td>{user.last_name}</td><td>{user.email}</td><td>{user.gender}</td>
                   <td>{user.street}</td><td>{user.city}</td><td>{user.country}</td><td>{user.phone}</td><td>{user.cerdit_card_type}</td>
-                  <td>{user.cerdit_card_number}</td><td>{user.currency}</td><td>{user.total_price}</td>
+                  <td>{user.cerdit_card_number}</td><td>{user.currency}</td><td>{user.total_price}</td>        
                   <td><button  className="btn modify" onClick={() => openModify(user)}>Modify Customer</button></td>
                   <td><button className="btn delete" onClick={() => handleDelete(user.customer_id)}>Delete Customer</button></td>
-                  <td><button className="btn trans-btn" onClick={() => OpenModalTransaction(user.customer_id)}>Customer Transactions</button></td>
+                  <td><button className="btn trans-btn" onClick={() => props.openModalTransaction(user.customer_id)}>Customer Transactions</button></td>
               </tr>
               </>
        )});
@@ -185,29 +189,3 @@ const Users = (props) => {
     )}
 
 export default Users; 
- 
- 
- 
- /* {users && users.map((user)=>{
-        <div>
-        <div >{user.customer_id} : {user.first_name} {user.last_name} </div>
-          <form>
-            <input id="1" >{user.customer_id}</input>
-            <input id="2" >{user.first_name}</input>
-            <input id="3" >{user.last_name}</input>
-            <input id="4" >{user.email}</input>
-            <input id="5" >{user.gender}</input>
-            <input id="6" >{user.country}</input>
-            <input id="7" >{user.city}</input>
-            <input id="8" >{user.street}</input>
-            <input id="9" >{user.phone}</input>
-            <input id="10" >{user.total_price}</input>
-            <input id="11" >{user.currency}</input>
-            <input id="12" >{user.cerdit_card_type}</input>
-            <input id="13" >{user.cerdit_card_number}</input>
-            <button onClick={HandleSubmit} >Save</button>
-          </form>
-        </div>
-      }) }
-       <p> {(users) && users[0].customer_id}</p>
-        <p>{(transArr) }</p> */

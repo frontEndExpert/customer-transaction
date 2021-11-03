@@ -32,6 +32,7 @@ import Users from './components/users/users';
 
 function App() {
 const [showCustomers, setShowCustomers] = useState(true);
+const [customerId, setCustomerId] = useState(true);
 //console.log("users.length",users.length);
 
 
@@ -41,18 +42,21 @@ const getCustomers = () => {
 }
 const getTransactions = () => {
   setShowCustomers(false);
+
   return null
 }
 
+const openTransaction = (userId) => {
+  setShowCustomers(false);
+  setCustomerId(userId);
+}
 
 
   return (
     <>
     <div className="App">
-      <button name="customers" onClick={getCustomers} >All Customers</button>
-      <button name="transactions" onClick={getTransactions} >All Transactions</button>
-    {showCustomers && <Users   /> }
-    { !showCustomers && <Transactions  />}
+    {showCustomers && <Users  openModalTransaction={(userId) => openTransaction(userId)}  /> }
+    { !showCustomers && <Transactions cid={customerId} />}
     </div>
     </>
   );

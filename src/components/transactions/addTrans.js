@@ -4,12 +4,12 @@ import './updateTrans.scss'
 const AddTrans = (props) => {
     const [id,setId] = useState(0);
     const [description,setDescription] = useState();
-    const [currency,setCurrency] = useState(props.transArr.currency);
+    const [currency,setCurrency] = useState();
     const [amount,setAmount] = useState(0);
-    const [cerditCardNumber,setCerditCardNumber] = useState(props.transArr.cerdit_card_number);
-    const [cerditCardType,setCerditCardType] = useState(props.transArr.cerdit_card_type);
-    const [customerId,setCustomerId] = useState(props.transArr.customer_id);
-    //const trans = props.transArr;
+    const [cerditCardNumber,setCerditCardNumber] = useState();
+    const [cerditCardType,setCerditCardType] = useState();
+    const [customerId,setCustomerId] = useState(props.userId);
+    //const trans = props.transArr; 
 
     console.log('props',props);
 
@@ -26,7 +26,7 @@ const AddTrans = (props) => {
       }
      
       console.log("formObj",formObj);
-      props.submitAdd(formObj);
+      props.handleSubmit(formObj);
     }
 
 

@@ -16,6 +16,7 @@
 
 4. the app is not complete
 there is a lot that can be done to improve
+design, layout, map, typescript, 
 
 
     
